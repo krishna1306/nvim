@@ -11,8 +11,10 @@ return {
       require("mason-lspconfig").setup {
         ensure_installed = {
           "lua_ls",
-          "pylsp",
+          -- "pylsp",
           "ts_ls",
+          "pyright",
+          "ruff_lsp",
         },
       }
     end,
@@ -28,6 +30,22 @@ return {
       lspconfig.pylsp.setup {
         capabilities = capabilities
       }
+      lspconfig.pyright.setup({
+        capabilities = capabilities,
+        filetypes = {"python"}
+      })
+      lspconfig.ruff_lsp.setup({
+        capabilities = capabilities,
+        init_options = {
+          settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+          }
+        }
+      })
+      lspconfig.pyright.setup({
+        capabilities = capabilities
+      })
       lspconfig.ts_ls.setup {
         capabilities = capabilities
       }
